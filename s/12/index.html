@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otis Redding - The dock of the bay — Exposicion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="escenario">
+    <div class="placa">
+      <div class="placa-cuerpo">
+        <span class="eyebrow">Pieza N.º 12</span>
+
+        
+
+        <h1 class="titulo-cancion">Otis Redding - The dock of the bay</h1>
+        <p class="artista">Otis Redding</p>
+        
+          <p class="cuadro-titulo">Inspira el cuadro «The dock of the bay»</p>
+        
+
+        
+          <audio id="audio" preload="metadata" src="../../audio/Otis_Redding-The_Dock_Of_The_Bay.m4a"></audio>
+          <div class="reproductor">
+            <button class="disco-boton" id="btnPlay" aria-label="Reproducir">
+              <span class="icono"></span>
+            </button>
+            <div style="flex:1">
+              <div class="barra-progreso" id="barra">
+                <div class="relleno" id="relleno"></div>
+              </div>
+              <div class="tiempos">
+                <span id="tiempoActual">0:00</span>
+                <span id="tiempoTotal">0:00</span>
+              </div>
+            </div>
+          </div>
+        
+
+        
+          <details class="info-toggle">
+            <summary>Sobre esta pieza</summary>
+            <p class="info-texto">Alegría, Asombro, Introspección</p>
+          </details>
+        
+      </div>
+      <div class="pie">Exposicion</div>
+    </div>
+  </div>
+
+  
+  <script>
+    const audio = document.getElementById('audio');
+    const btnPlay = document.getElementById('btnPlay');
+    const barra = document.getElementById('barra');
+    const relleno = document.getElementById('relleno');
+    const tiempoActual = document.getElementById('tiempoActual');
+    const tiempoTotal = document.getElementById('tiempoTotal');
+
+    function formatear(segundos) {
+      if (!isFinite(segundos)) return '0:00';
+      const m = Math.floor(segundos / 60);
+      const s = Math.floor(segundos % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    btnPlay.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        btnPlay.classList.add('girando');
+      } else {
+        audio.pause();
+        btnPlay.classList.remove('girando');
+      }
+    });
+
+    audio.addEventListener('ended', () => btnPlay.classList.remove('girando'));
+
+    audio.addEventListener('loadedmetadata', () => {
+      tiempoTotal.textContent = formatear(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const pct = (audio.currentTime / audio.duration) * 100 || 0;
+      relleno.style.width = pct + '%';
+      tiempoActual.textContent = formatear(audio.currentTime);
+    });
+
+    barra.addEventListener('click', (e) => {
+      const rect = barra.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    });
+  </script>
+  
+</body>
+</html>

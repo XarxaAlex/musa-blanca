@@ -1,0 +1,297 @@
+:root {
+  --pared: #1c2321;       /* pared de galeria, verde-carbon */
+  --pared-2: #262f2c;
+  --papel: #f0ead9;       /* cartela de museo, papel envejecido */
+  --papel-sombra: #ddd4bd;
+  --texto-oscuro: #2a2620;
+  --texto-claro: #e8e2d0;
+  --laton: #b08d57;       /* laton de la placa */
+  --oxido: #8b3a2f;       /* rojo oxido, acento secundario */
+  --radio: 4px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--pared);
+  background-image:
+    radial-gradient(ellipse at top, var(--pared-2), var(--pared) 60%);
+  color: var(--texto-claro);
+  font-family: 'Work Sans', -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.escenario {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ---- Cartela / placa central ---- */
+.placa {
+  width: 100%;
+  max-width: 420px;
+  background: var(--papel);
+  color: var(--texto-oscuro);
+  border-radius: var(--radio);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 20px 50px rgba(0,0,0,0.45);
+  border: 1px solid rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.placa::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--laton), #d8b98a, var(--laton));
+}
+
+.placa-cuerpo {
+  padding: 36px 30px 30px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--laton);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.imagen-cuadro {
+  width: 100%;
+  border-radius: 3px;
+  margin-bottom: 18px;
+  display: block;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.titulo-cancion {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+
+.artista {
+  font-size: 15px;
+  color: #55503f;
+  margin: 0 0 4px;
+}
+
+.cuadro-titulo {
+  font-size: 13px;
+  color: #7a7460;
+  margin: 0 0 26px;
+  font-style: italic;
+}
+
+/* ---- Reproductor tipo disco ---- */
+.reproductor {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+
+.disco-boton {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at center, var(--papel) 0 6px, var(--texto-oscuro) 7px, #111 60%, #000 100%);
+  position: relative;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+
+.disco-boton:active { transform: scale(0.96); }
+
+.disco-boton .icono {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 9px 0 9px 14px;
+  border-color: transparent transparent transparent var(--papel);
+}
+
+.disco-boton.girando {
+  animation: girar 3.2s linear infinite;
+}
+
+.disco-boton.girando .icono {
+  border-width: 0 6px 12px 6px;
+  border-color: transparent transparent var(--papel) transparent;
+  left: calc(50% - 1px);
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.barra-progreso {
+  flex: 1;
+  height: 3px;
+  background: var(--papel-sombra);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.barra-progreso .relleno {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 0%;
+  background: var(--laton);
+  border-radius: 2px;
+}
+
+.tiempos {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #8a8468;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sin-audio {
+  font-size: 13px;
+  color: var(--oxido);
+  border: 1px dashed var(--oxido);
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-top: 4px;
+}
+
+/* ---- Info ampliable ---- */
+.info-toggle {
+  margin-top: 26px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  padding-top: 16px;
+}
+
+.info-toggle summary {
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--laton);
+  font-weight: 600;
+  list-style: none;
+}
+
+.info-toggle summary::-webkit-details-marker { display: none; }
+
+.info-toggle summary::after {
+  content: " +";
+}
+
+.info-toggle[open] summary::after {
+  content: " -";
+}
+
+.info-texto {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #4a4534;
+  margin-top: 12px;
+}
+
+.pie {
+  text-align: center;
+  font-size: 11px;
+  color: #857f66;
+  padding: 16px 30px 24px;
+  background: rgba(0,0,0,0.03);
+}
+
+/* ---- Catalogo (pagina indice) ---- */
+.catalogo {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.catalogo h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--papel);
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.lista-canciones {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lista-canciones a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--papel);
+  color: var(--texto-oscuro);
+  text-decoration: none;
+  padding: 16px 20px;
+  border-radius: var(--radio);
+  border-left: 4px solid var(--laton);
+}
+
+.lista-canciones a .num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--laton);
+  text-transform: uppercase;
+  margin-right: 14px;
+}
+
+.lista-canciones a .titulo-item {
+  flex: 1;
+  font-weight: 600;
+}
+
+.lista-canciones a .artista-item {
+  font-size: 13px;
+  color: #6f6a54;
+}
+
+/* ---- 404 ---- */
+.no-encontrado {
+  text-align: center;
+  color: var(--papel);
+}
+
+.no-encontrado h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 40px;
+}
+
+@media (max-width: 480px) {
+  .placa-cuerpo { padding: 28px 22px 22px; }
+  .titulo-cancion { font-size: 25px; }
+}
