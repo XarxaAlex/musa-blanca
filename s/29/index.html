@@ -16,16 +16,32 @@
 
         
 
-        <h1 class="titulo-cancion">La Mancha - El Canario Manchego</h1>
-        <p class="artista">El Canario Manchego</p>
+        <h1 class="titulo-cancion">Mago de Oz BSO - over the rainbow</h1>
+        <p class="artista">Mago de Oz BSO</p>
         
-          <p class="cuadro-titulo">Inspira el cuadro «La Mancha»</p>
+          <p class="cuadro-titulo">Inspira el cuadro «Over the Rainbow»</p>
         
 
-        
-          <div class="sin-audio">
-            No se encontro el archivo de audio «El_Canario_Manchego-La_Mancha.m4a». Comprueba que este en public/audio/.
+           <audio id="audio" preload="metadata" src="../../audio/Mago_de_Oz-somewhere.m4a"></audio>
+          <div class="reproductor">
+            <button class="disco-boton" id="btnPlay" aria-label="Reproducir">
+              <span class="icono"></span>
+            </button>
+            <div style="flex:1">
+              <div class="barra-progreso" id="barra">
+                <div class="relleno" id="relleno"></div>
+              </div>
+              <div class="tiempos">
+                <span id="tiempoActual">0:00</span>
+                <span id="tiempoTotal">0:00</span>
+              </div>
+            </div>
           </div>
+        
+          <details class="info-toggle">
+            <summary>Sobre esta pieza</summary>
+            <p class="info-texto">Piluca de la fuente</p>
+          </details>
         
 
         

@@ -16,16 +16,33 @@
 
         
 
-        <h1 class="titulo-cancion">Opening the Glasswork - Philip Glass</h1>
-        <p class="artista">Philip Glass</p>
+        <h1 class="titulo-cancion">The Irrepesibles- In this shirt  </h1>
+        <p class="artista">The Irrepesibles</p>
         
-          <p class="cuadro-titulo">Inspira el cuadro «Opening the Glasswork»</p>
+          <p class="cuadro-titulo">Inspira el cuadro «In this shirt»</p>
         
 
         
-          <div class="sin-audio">
-            No se encontro el archivo de audio «Philip_Glass-Glassworks.opus». Comprueba que este en public/audio/.
+           <audio id="audio" preload="metadata" src="../../audio/The_Irrepressibles-In_This_Shirt.mp4"></audio>
+          <div class="reproductor">
+            <button class="disco-boton" id="btnPlay" aria-label="Reproducir">
+              <span class="icono"></span>
+            </button>
+            <div style="flex:1">
+              <div class="barra-progreso" id="barra">
+                <div class="relleno" id="relleno"></div>
+              </div>
+              <div class="tiempos">
+                <span id="tiempoActual">0:00</span>
+                <span id="tiempoTotal">0:00</span>
+              </div>
+            </div>
           </div>
+        
+          <details class="info-toggle">
+            <summary>Sobre esta pieza</summary>
+            <p class="info-texto">Pilar Galán</p>
+          </details>
         
 
         
